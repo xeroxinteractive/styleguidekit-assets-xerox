@@ -1358,7 +1358,8 @@ window.addEventListener("message", receiveIframeMessage, false);
     discoID = false,
     discoMode = false,
     fullMode = true,
-    hayMode = false;
+    hayMode = false,
+    rtl = false;
 
 
 
@@ -1600,6 +1601,19 @@ window.addEventListener("message", receiveIframeMessage, false);
     } else {
       killHay();
     }
+  });
+
+  //RTL Mode - Toggle between RTL and LTR
+  $('#sg-size-rtl').on("click", function(e){
+    e.preventDefault();
+    killDisco();
+    killHay();
+    var html = $(document.getElementById('sg-viewport').contentWindow.document.getElementsByTagName('html'));
+    var next = rtl ? 'ltr' : 'rtl';
+    var current = rtl ? 'rtl' : 'ltr';
+    html.attr('dir', next.toLowerCase());
+    $(this).text(current.toUpperCase());
+    rtl = !rtl;
   });
 
   //Pixel input
